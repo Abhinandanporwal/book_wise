@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import Image from "next/image";
+
 import { useState } from "react";
 import { Button } from "../components/ui/button";
 import {
@@ -39,15 +39,16 @@ export default function Home() {
           </CardHeader>
           <CardContent>
             <ul className="list-disc list-inside text-gray-900 space-y-1">
-              <li>"Do you have books on data mining?"</li>
-              <li>"Renew my borrowed books."</li>
-              <li>"What’s my fine for late returns?"</li>
-              <li>"Suggest trending machine learning books."</li>
+              <li>&quot;Do you have books on data mining?&quot;</li>
+              <li>&quot;Renew my borrowed books.&quot;</li>
+              <li>&quot;What&apos;s my fine for late returns?&quot;</li>
+              <li>&quot;Suggest trending machine learning books.&quot;</li>
             </ul>
+
           </CardContent>
           <CardFooter className="text-sm text-gray-900
           ">
-            Powered by AI and your library's collection.
+            Powered by AI and your library&apos;s collection.
           </CardFooter>
         </Card>
       </div>
