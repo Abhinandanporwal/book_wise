@@ -53,7 +53,7 @@ export default function Home() {
         return
       }
 
-      const data = await res.json()
+      
       router.push("/admin")
     } catch (err) {
       setAdminError("Something went wrong")
