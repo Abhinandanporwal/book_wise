@@ -18,6 +18,10 @@ export default function RootLayout({
   return (
     <ClerkProvider>
     <html lang="en" >
+    <head>
+          <link rel="icon" href="/a.svg" type="image/svg+xml" />
+          <link rel="alternate icon" href="/a.svg" type="image/svg+xml" />
+        </head>
       <body>
         <Header />
         <main>{children}</main>
