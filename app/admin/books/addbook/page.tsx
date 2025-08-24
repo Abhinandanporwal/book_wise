@@ -127,7 +127,7 @@ export default function AddBookForm() {
       } else {
         setFeedback({ type: "error", message: result.error || "Failed to add book. Please try again." });
       }
-    } catch (error) {
+    } catch (_error) {
       // This catches network errors or issues with the fetch request itself.
       setFeedback({ type: "error", message: "An unexpected error occurred. Please check your connection." });
     } finally {

@@ -5,7 +5,7 @@ export async function GET() {
   try {
     const books = await db.book.findMany()
     return NextResponse.json(books)
-  } catch (error) {
+  } catch (_error) {
     return NextResponse.json({ error: "Failed to fetch books" }, { status: 500 })
   }
 }
