@@ -1,6 +1,5 @@
 import type React from "react"
 import { Sidebar } from "@/components/admin/sidebar"
-import Header from "@/components/header"
 
 export default function AdminLayout({
   children,
