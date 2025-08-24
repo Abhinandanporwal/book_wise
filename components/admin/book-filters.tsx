@@ -33,9 +33,6 @@ export function BookFilters() {
     startTransition(async () => {
       try {
         const result = await getFilteredBooks({ query: search, category, status, sort })
-        if(result){
-          setBooks(result)
-        }
         setBooks(result || [])
       } catch (error) {
         console.error("Error fetching books:", error)
