@@ -32,6 +32,9 @@ export function BooksTable() {
   const handleadd = () => {
     router.push("books/addbook");
   };
+  const commingsoon = () => {
+    router.push("comingsoon")
+  }
   
   const [books, setBooks] = useState<Book[]>([])
   const [selectedBooks, setSelectedBooks] = useState<string[]>([])
@@ -158,12 +161,12 @@ export function BooksTable() {
                         <span className="sr-only">Open menu</span>
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-40">
+                    <DropdownMenuContent align="end" className="w-40" onClick={commingsoon}>
                       <DropdownMenuItem>
                         <Edit className="h-4 w-4 mr-2" />
                         Edit
                       </DropdownMenuItem>
-                      <DropdownMenuItem className="text-red-500">
+                      <DropdownMenuItem className="text-red-500" onClick={commingsoon}>
                         <Trash className="h-4 w-4 mr-2" />
                         Delete
                       </DropdownMenuItem>

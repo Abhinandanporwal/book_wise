@@ -48,6 +48,9 @@ export function UsersTable() {
   const handleAdd = () => {
     router.push("users/adduser")
   }
+  const commingsoon = () => {
+    router.push("comingsoon")
+  }
 
   const handleAddFine = (userId: number) => {
     // Redirect to the AddFine page with userId as a query parameter
@@ -139,7 +142,7 @@ export function UsersTable() {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="w-40">
-                      <DropdownMenuItem>
+                      <DropdownMenuItem onClick={commingsoon}>
                         <Edit className="h-4 w-4 mr-2" />
                         Edit
                       </DropdownMenuItem>
@@ -149,7 +152,7 @@ export function UsersTable() {
                         Add Fine
                       </DropdownMenuItem>
 
-                      <DropdownMenuItem className="text-red-500">
+                      <DropdownMenuItem className="text-red-500" onClick={commingsoon}>
                         <Trash className="h-4 w-4 mr-2" />
                         Delete
                       </DropdownMenuItem>
