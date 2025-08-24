@@ -13,18 +13,34 @@ import {
 } from "@/components/ui/select"
 import { Search, X } from "lucide-react"
 
+interface Book {
+  id: string
+  title: string
+  author: string
+  category: string
+  status: "available" | "loaned"
+}
+
 export function BookFilters() {
-  const [search, setSearch] = useState("")
-  const [category, setCategory] = useState("all")
-  const [status, setStatus] = useState("all")
-  const [sort, setSort] = useState("recent")
-  const [books, setBooks] = useState([])
+  const [search, setSearch] = useState<string>("")
+  const [category, setCategory] = useState<string>("all")
+  const [status, setStatus] = useState<string>("all")
+  const [sort, setSort] = useState<string>("recent")
+  const [books, setBooks] = useState<Book[]>([])
   const [isPending, startTransition] = useTransition()
 
   useEffect(() => {
     startTransition(async () => {
-      const result = await getFilteredBooks({ query: search, category, status, sort })
-      setBooks(result)
+      try {
+        const result = await getFilteredBooks({ query: search, category, status, sort })
+        if(result){
+          setBooks(result)
+        }
+        setBooks(result || [])
+      } catch (error) {
+        console.error("Error fetching books:", error)
+        setBooks([])
+      }
     })
   }, [search, category, status, sort])
 
@@ -37,15 +53,23 @@ export function BookFilters() {
 
   return (
     <div className="bg-gray-800/70 border border-gray-700/50 rounded-lg p-4 mb-6 space-y-4">
+      {/* Header with Clear Filters */}
       <div className="flex items-center justify-between">
         <h3 className="font-medium text-gray-100">Filters</h3>
-        <Button variant="ghost" size="sm" className="h-8 text-gray-400 hover:text-gray-100" onClick={handleClearFilters}>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="h-8 text-gray-400 hover:text-black"
+          onClick={handleClearFilters}
+        >
           <X className="h-4 w-4 mr-1" />
           Clear filters
         </Button>
       </div>
 
+      {/* Filter Controls */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        {/* Search Input */}
         <div className="relative">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500" />
           <Input
@@ -56,6 +80,7 @@ export function BookFilters() {
           />
         </div>
 
+        {/* Category Filter */}
         <Select value={category} onValueChange={setCategory}>
           <SelectTrigger className="bg-gray-900/50 border-gray-700 text-gray-100">
             <SelectValue placeholder="Category" />
@@ -70,6 +95,7 @@ export function BookFilters() {
           </SelectContent>
         </Select>
 
+        {/* Status Filter */}
         <Select value={status} onValueChange={setStatus}>
           <SelectTrigger className="bg-gray-900/50 border-gray-700 text-gray-100">
             <SelectValue placeholder="Status" />
@@ -81,6 +107,7 @@ export function BookFilters() {
           </SelectContent>
         </Select>
 
+        {/* Sort Filter */}
         <Select value={sort} onValueChange={setSort}>
           <SelectTrigger className="bg-gray-900/50 border-gray-700 text-gray-100">
             <SelectValue placeholder="Sort by" />
@@ -94,13 +121,20 @@ export function BookFilters() {
         </Select>
       </div>
 
+      {/* Loading Indicator */}
       {isPending && <p className="text-sm text-gray-400 mt-4">Loading books...</p>}
+
+      {/* Book List */}
       <div className="mt-4 space-y-2">
-        {books.map((book: any) => (
-          <div key={book.id} className="text-gray-200">
-            {book.title} by {book.author}
-          </div>
-        ))}
+        {books.length === 0 && !isPending ? (
+          <p className="text-gray-400 text-sm">No books found.</p>
+        ) : (
+          books.map((book) => (
+            <div key={book.id} className="text-gray-200">
+              {book.title} <span className="text-gray-400">by {book.author}</span>
+            </div>
+          ))
+        )}
       </div>
     </div>
   )

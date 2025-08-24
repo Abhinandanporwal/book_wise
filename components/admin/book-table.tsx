@@ -86,7 +86,7 @@ export function BooksTable() {
               Delete ({selectedBooks.length})
             </Button>
           )}
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className=" text-black">
             <Download className="h-4 w-4 mr-1" />
             Export
           </Button>
